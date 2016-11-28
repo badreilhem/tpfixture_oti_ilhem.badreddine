@@ -10,9 +10,13 @@ MoneyOps.add = function(m1,m2){
 }
 
 MoneyOps.sub = function(m1,m2){
-	if(m1.getCurrency()==m2.getCurrency()){
-			return new money(m1.getValue()-m2.getValue(),m1.getCurrency());
+	if (m1.getValue() < m2.getValue()) {
+		throw new ValeursPasDansLeBonOrdreExc(m1.getValue(),m2.getValue());
 	}else{
-		throw new DevisesIncompatibleExc(m1,m2);
+		if(m1.getCurrency()==m2.getCurrency()){
+				return new money(m1.getValue()-m2.getValue(),m1.getCurrency());
+		}else{
+			throw new DevisesIncompatibleExc(m1.getCurrency(),m2.getCurrency());
+		}
 	}
 }
