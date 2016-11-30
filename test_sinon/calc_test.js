@@ -120,3 +120,24 @@ QUnit.test("test_computeresults_sub", function(assert)
         assert.equal(c.message,"Result : 0 (EUR)");
 }
 );
+
+//test v<0 et longueur cur>3
+QUnit.test("test_computeresults_sub", function(assert)
+{
+        var fixture="";
+        fixture+=("<form id='form0'>");
+        fixture+=("<input type='text' id='v1' name='v1' value='-2'/>");
+        fixture+=("<input type='text' id='c1' name='c1' value='EUR'/>");
+        fixture+=("<input type='text' id='v2' name='v2' value='2'/>");
+        fixture+=("<input type='text' id='c2' name='c2' value='EUR'/>");
+        fixture+=("<input type='text' id='ops' name='ops' value='SUB'/>");
+        fixture+=("</form>");
+
+        var fixtureNode=document.getElementById("qunit-fixture");
+        fixtureNode.innerHTML=fixture;
+
+        var c=new calc();
+        c.computeResult(document.getElementById('form0'));
+        assert.equal(c.message,"Result : 0 (EUR)");
+}
+);
